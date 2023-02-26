@@ -5,6 +5,12 @@ use std::{env, io::Result};
 
 #[async_std::main]
 async fn main() -> Result<()> {
+    // If no arguments are passed, print the help message
+    if env::args().len() == 1 {
+        println!("Usage: rj <link1> <link2> ...");
+        std::process::exit(1);
+    }
+
     for link in env::args().skip(1) {
         let audio_links = get_audiolinks_from_rj(&link).await?;
         for audio_link in audio_links {
@@ -18,6 +24,7 @@ async fn main() -> Result<()> {
             while let Some(chunk) = response.chunk().await.unwrap() {
                 file.write_all(&chunk).await.unwrap();
             }
+            println!("Downloaded {}", filename);
         }
     }
     Ok(())

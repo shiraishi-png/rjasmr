@@ -5,7 +5,7 @@ Simple [japaneseasmr.com](https://japaneseasmr.com/) downloader, written in Rust
 ## Usage
 
 ```bash
-rj [urls]
+rj <link1> <link2> ...
 ```
 
 ## Installation
