@@ -1,6 +1,6 @@
 [package]
 name = "rjasmr"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 description = "Simple japaneseasmr.com downloader, written in Rust🚀"
 license = "MIT"
