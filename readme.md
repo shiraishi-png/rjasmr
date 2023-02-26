@@ -1,6 +1,6 @@
 # RJ
 
-Just a simple japaneseASMR.com downloader.
+Simple [japaneseasmr.com](https://japaneseasmr.com/) downloader, written in Rust🚀.
 
 ## Usage
 
@@ -11,8 +11,5 @@ rj [urls]
 ## Installation
 
 ```bash
-git clone https://github.com/marnixah/rj.git
-cd rj
-cargo build --release
-cargo install --path .
+cargo install https://github.com/marnixah/rj.git
 ```
