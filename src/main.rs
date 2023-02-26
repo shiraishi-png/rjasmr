@@ -8,7 +8,7 @@ use std::{env, io::Result};
 async fn main() -> Result<()> {
     // If no arguments are passed, print the help message
     if env::args().len() == 1 {
-        println!("Usage: rj <link1> <link2> ...");
+        println!("Usage: rjasmr <link1> <link2> ...");
         std::process::exit(1);
     }
 

@@ -1,11 +1,11 @@
-# RJ
+# RJASMR
 
 Simple [japaneseasmr.com](https://japaneseasmr.com/) downloader, written in Rust🚀.
 
 ## Usage
 
 ```bash
-rj <link1> <link2> ...
+rjasmr <link1> <link2> ...
 ```
 
 ## Installation
