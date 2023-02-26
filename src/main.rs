@@ -15,6 +15,12 @@ async fn main() -> Result<()> {
         let audio_links = get_audiolinks_from_rj(&link).await?;
         for audio_link in audio_links {
             let filename = audio_link.split("/").last().unwrap();
+            // Check if the file already exists
+            if async_std::fs::metadata(filename).await.is_ok() {
+                println!("{} already exists", filename);
+                continue;
+            }
+
             let mut response = reqwest::Client::new()
                 .get(&audio_link)
                 .send()
