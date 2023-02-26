@@ -11,5 +11,5 @@ rj [urls]
 ## Installation
 
 ```bash
-cargo install https://github.com/marnixah/rj.git
+cargo install --git https://github.com/marnixah/rj.git
 ```
