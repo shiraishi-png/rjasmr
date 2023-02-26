@@ -11,5 +11,5 @@ rjasmr <link1> <link2> ...
 ## Installation
 
 ```bash
-cargo install --git https://github.com/marnixah/rj.git
+cargo install --git https://github.com/marnixah/rjasmr.git
 ```
