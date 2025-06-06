@@ -1,23 +1,6 @@
 > **Note:** This is a fork of the original [rjasmr](https://github.com/SophiaH67/rjasmr) by [SophiaH67](https://github.com/SophiaH67). This version includes some enhancements, including download progress bars, automatic thumbnail embedding, and more robust error handling.
 A huge thank you to SophiaH67 for creating the original program that this work is based on.
 
-Original description from the author:
-# RJASMR
-
-Simple [japaneseasmr.com](https://japaneseasmr.com/) downloader, written in Rust🚀.
-
-## Usage
-
-```bash
-rjasmr <link1> <link2> ...
-```
-
-## Installation
-
-```bash
-cargo install --git https://github.com/marnixah/rjasmr.git
-```
-
 ## New Features in this Fork
 
 This version of `rjasmr` adds the following improvements:
@@ -34,4 +17,27 @@ The core usage remains the same. Pass one or more URLs to the program as command
 
 ```bash
 rjasmr <link1> <link2> ...
+```
+## Installation
+
+```bash
+cargo install --git https://github.com/shiraishi-png/rjasmr.git
+```
+
+
+Original description from the author:
+# RJASMR
+
+Simple [japaneseasmr.com](https://japaneseasmr.com/) downloader, written in Rust🚀.
+
+## Usage
+
+```bash
+rjasmr <link1> <link2> ...
+```
+
+## Installation
+
+```bash
+cargo install --git https://github.com/marnixah/rjasmr.git
 ```
