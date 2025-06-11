@@ -4,7 +4,7 @@ use rjasmr::get_thumbnail_url_from_html;
 async fn thumbnail_from_anchor_href() {
     let html = r#"
         <html><body>
-        <a id=\"img_cover\" href=\"https://example.com/thumb.jpg\">cover</a>
+        <a id="img_cover" href="https://example.com/thumb.jpg">cover</a>
         </body></html>
     "#;
     let url = get_thumbnail_url_from_html(html);
@@ -15,7 +15,7 @@ async fn thumbnail_from_anchor_href() {
 async fn thumbnail_from_img_data_src() {
     let html = r#"
         <html><body>
-        <div id=\"img_cover\"><img data-src=\"https://example.com/img.jpg\" /></div>
+        <div id="img_cover"><img data-src="https://example.com/img.jpg" /></div>
         </body></html>
     "#;
     let url = get_thumbnail_url_from_html(html);
