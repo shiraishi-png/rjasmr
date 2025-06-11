@@ -2,6 +2,7 @@ use async_std::io::WriteExt;
 use scraper::Html;
 use scraper::Selector;
 use std::{env, error::Error, io::Result};
+use rjasmr::get_thumbnail_url_from_rj;
 
 // Imports
 use indicatif::{ProgressBar, ProgressStyle};
@@ -138,26 +139,6 @@ pub fn embed_thumbnail(file_path: &str, image_data: &[u8]) -> std::result::Resul
     tag.write_to_path(file_path, Version::Id3v24)
 }
 
-/// --- THIS IS THE UPDATED, SMARTER FUNCTION ---
-pub async fn get_thumbnail_url_from_rj(url: &str) -> Result<Option<String>> {
-    let body = reqwest::get(url).await.map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?
-    .text().await.map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
-    let document = Html::parse_document(&body);
-
-    // Attempt 1: Look for an 'href' directly on #img_cover (for <a> tags)
-    let thumb_url = document.select(&Selector::parse("#img_cover").unwrap())
-    .next()
-    .and_then(|e| e.value().attr("href"))
-    .or_else(|| {
-        // Attempt 2 (if Attempt 1 failed): Look for an 'img' inside #img_cover and get its 'data-src'
-        document.select(&Selector::parse("#img_cover img").unwrap())
-        .next()
-        .and_then(|e| e.value().attr("data-src"))
-    })
-    .map(|s| s.to_string());
-
-    Ok(thumb_url)
-}
 
 pub async fn get_audio_response(page_url: &str) -> std::result::Result<reqwest::Response, Box<dyn Error>> {
     let body = reqwest::get(page_url).await?.text().await?;
