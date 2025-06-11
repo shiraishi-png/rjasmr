@@ -1,6 +1,4 @@
 use async_std::io::WriteExt;
-use scraper::Html;
-use scraper::Selector;
 use std::{env, error::Error, io::Result};
 use rjasmr::get_thumbnail_url_from_rj;
 
@@ -142,14 +140,8 @@ pub fn embed_thumbnail(file_path: &str, image_data: &[u8]) -> std::result::Resul
 
 pub async fn get_audio_response(page_url: &str) -> std::result::Result<reqwest::Response, Box<dyn Error>> {
     let body = reqwest::get(page_url).await?.text().await?;
-    let document = Html::parse_document(&body);
-    let selector = Selector::parse("video>source").unwrap();
-
-    let audio_url = document.select(&selector)
-    .filter_map(|e| e.value().attr("src"))
-    .map(|s| s.to_string())
-    .next()
-    .ok_or("No audio source with a 'src' attribute found inside a <video> tag.")?;
+    let audio_url = rjasmr::get_audio_url_from_html(&body)
+        .ok_or("No audio source with a 'src' attribute found inside a <video> tag.")?;
 
     println!("Found audio link: {}", audio_url);
 

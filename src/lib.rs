@@ -15,6 +15,12 @@ pub fn get_thumbnail_url_from_html(body: &str) -> Option<String> {
                 .next()
                 .and_then(|e| e.value().attr("data-src"))
         })
+        .or_else(|| {
+            document
+                .select(&Selector::parse(".img-content img").unwrap())
+                .next()
+                .and_then(|e| e.value().attr("data-src"))
+        })
         .map(|s| s.to_string())
 }
 
@@ -27,4 +33,24 @@ pub async fn get_thumbnail_url_from_rj(url: &str) -> Result<Option<String>> {
         .await
         .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
     Ok(get_thumbnail_url_from_html(&body))
+}
+
+/// Extract the first audio URL from a page, preferring `.mp3` sources when
+/// available.
+pub fn get_audio_url_from_html(body: &str) -> Option<String> {
+    let document = Html::parse_document(body);
+    let selector = Selector::parse("video>source").unwrap();
+    // Look for an explicit mp3 source first
+    if let Some(src) = document
+        .select(&selector)
+        .find(|e| e.value().attr("src").map_or(false, |s| s.ends_with(".mp3")))
+        .and_then(|e| e.value().attr("src"))
+    {
+        return Some(src.to_string());
+    }
+    // Fallback to the first source element with a src attribute
+    document
+        .select(&selector)
+        .find_map(|e| e.value().attr("src"))
+        .map(|s| s.to_string())
 }
