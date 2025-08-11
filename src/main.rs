@@ -8,7 +8,7 @@ use std::process::Command;
 use std::sync::Arc;
 
 // Tune this
-const CONCURRENCY: usize = 2;
+const CONCURRENCY: usize = 3;
 
 #[async_std::main]
 async fn main() -> std::io::Result<()> {
